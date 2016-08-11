@@ -1,7 +1,4 @@
 module.exports = {
-    "extends": "airbnb",
-    "installedESLint": true,
-    "plugins": [
-        "react"
-    ]
+    "extends": "google",
+    "installedESLint": true
 };

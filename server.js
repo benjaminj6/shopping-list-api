@@ -1,27 +1,28 @@
-const express = require('express');
+var express = require('express');
 
-function Storage() {
+var Storage = function() {
   this.items = [];
   this.id = 0;
-}
+};
 
-Storage.prototype.add = (name) => {
-  const item = { name, id: this.id };
+Storage.prototype.add = function(name) {
+  var item = {name: name, id: this.id};
   this.items.push(item);
   this.id += 1;
   return item;
 };
 
-let storage = new Storage();
+var storage = new Storage();
 storage.add('Broad beans');
 storage.add('Tomatoes');
 storage.add('Peppers');
 
-let app = express();
+var app = express();
 app.use(express.static('public'));
 
-app.get('/items', (request, response) => {
+app.get('/items', function(request, response) {
   response.json(storage.items);
 });
 
-app.listen(process.env.PORT, process.env.IP);
+app.listen(8080);
+console.log('Your app is now running on port 8080');
