@@ -20,10 +20,10 @@ storage.add('Peppers');
 var app = express();
 app.use(express.static('public'));
 
-app.get('/items', function(request, response) {
-  response.json(storage.items);
+app.get('/items', function(req, res) {
+  res.status(200).json(storage.items);
 });
 
-app.listen(3000, function() {
-  console.log('Your app is now running on port 3000');
+app.listen(8080, function() {
+  console.log('Your app is now running on port 8080');
 });
