@@ -24,5 +24,6 @@ app.get('/items', function(request, response) {
   response.json(storage.items);
 });
 
-app.listen(8080);
-console.log('Your app is now running on port 8080');
+app.listen(3000, function() {
+  console.log('Your app is now running on port 3000');
+});
