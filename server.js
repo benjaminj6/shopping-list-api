@@ -29,14 +29,15 @@ app.get('/items', function(req, res) {
 });
 
 app.post('/items', function(req, res) {
-	if(req.body) {
+	console.log(req.body);
+
+	if(Object.keys(req.body).length) {
 		var item = storage.addItem(req.body.name); 
 
 		return res.status(201).json(item);
 	} else {
 		return res.sendStatus(400);
 	}
-
 });
 
 app.listen(8080, function() {

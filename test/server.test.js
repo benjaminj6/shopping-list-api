@@ -36,7 +36,7 @@ describe('POST request on /items', function() {
 	it('valid request should return 201 and added item', function(done) {
 		chai.request(app)
 			.post('/items')
-			.send({name: 'chocolate'})
+			.send({'name': 'chocolate'})
 			.end(function(err, res) {
 				should.equal(err, null);
 				res.should.have.status(201);
@@ -49,6 +49,27 @@ describe('POST request on /items', function() {
 				done();
 			});
 	});
+
+	it('request with no body should return 400 error', function(done) {
+		chai.request(app)
+			.post('/items')
+			.send('asdfasdf')
+			.end(function(err, res) {
+				err.should.have.status(400);
+				done();
+			});
+	});
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
