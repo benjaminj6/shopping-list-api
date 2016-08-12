@@ -50,12 +50,12 @@ describe('POST request on /items', function() {
 			});
 	});
 
-	it('request with no body should return 400 error', function(done) {
+	it('request with invalid JSON should return 400 error', function(done) {
 		chai.request(app)
 			.post('/items')
 			.send('asdfasdf')
 			.end(function(err, res) {
-				err.should.have.status(400);
+				res.should.have.status(400);
 				done();
 			});
 	});
