@@ -55,7 +55,18 @@ describe('POST request on /items', function() {
 			.post('/items')
 			.send('asdfasdf')
 			.end(function(err, res) {
-				res.should.have.status(400);
+				err.should.have.status(400);
+				done();
+			});
+	});
+
+	it('request with empty body should return 400 error', function(done) {
+		chai.request(app)
+			.post('/items')
+			.send()
+			.end(function(err, res) {
+				err.should.have.status(400);
+				res.body.error.should.equal('BAD REQUEST');
 				done();
 			});
 	});
