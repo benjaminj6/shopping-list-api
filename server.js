@@ -27,3 +27,6 @@ app.get('/items', function(req, res) {
 app.listen(8080, function() {
   console.log('Your app is now running on port 8080');
 });
+
+exports.app = app;
+exports.storage = storage;
