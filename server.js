@@ -31,7 +31,7 @@ app.get('/items', function(req, res) {
 app.post('/items', function(req, res) {
 	console.log(req.body);
 
-	if(Object.keys(req.body).length) {
+	if(req.body) {
 		var item = storage.addItem(req.body.name); 
 
 		return res.status(201).json(item);
