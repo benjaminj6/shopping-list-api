@@ -10,23 +10,34 @@ var Storage = {
   id: 0,
 };
 
-Storage.add = function(name) {
+Storage.addItem = function(name) {
   var item = {name: name, id: this.id};
+  
   this.items.push(item);
   this.id += 1;
+  
   return item;
 };
 
 var storage = Object.create(Storage);
-storage.add('Broad beans');
-storage.add('Tomatoes');
-storage.add('Peppers');
+storage.addItem('Broad beans');
+storage.addItem('Tomatoes');
+storage.addItem('Peppers');
 
 app.get('/items', function(req, res) {
   res.status(200).json(storage.items);
 });
 
+app.post('/items', function(req, res) {
+	if(req.body) {
+		var item = storage.addItem(req.body.name); 
 
+		return res.status(201).json(item);
+	} else {
+		return res.sendStatus(400);
+	}
+
+});
 
 app.listen(8080, function() {
   console.log('Your app is now running on port 8080');

@@ -22,7 +22,7 @@ describe('GET request on /items', function() {
   		});	
   });
 
-  it('invalid endpoint should return 404 error', function() {
+  it('invalid endpoint should return 404 error', function(done) {
   	chai.request(app)
   		.get('/aaaaa')
   		.end(function(err, res) {
@@ -33,5 +33,22 @@ describe('GET request on /items', function() {
 });
 
 describe('POST request on /items', function() {
-
+	it('valid request should return 201 and added item', function(done) {
+		chai.request(app)
+			.post('/items')
+			.send({name: 'chocolate'})
+			.end(function(err, res) {
+				should.equal(err, null);
+				res.should.have.status(201);
+				res.should.be.json;
+				res.body.should.be.a('object');
+				storage.items.length.should.equal(4);
+				storage.items[3].should.have.property('name');
+				storage.items[3].name.should.equal('chocolate');
+				storage.items[3].id.should.equal(3);
+				done();
+			});
+	});
 });
+
+
